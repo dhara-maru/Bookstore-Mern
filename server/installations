@@ -1,1 +1,7 @@
 npm install express cors mongodb nodemon
+
+npm create vite@latest client -- --template react
+
+
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
