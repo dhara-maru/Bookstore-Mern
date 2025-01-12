@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+import { useLocation } from "react-router-dom";
+
+
 // Icons
 import { FaBarsStaggered, FaXmark } from "react-icons/fa6";
 
 const NavBar = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
+  
+const location = useLocation();
 
   // Toggle menu
   const toggleMenu = () => setMenuOpen(!isMenuOpen);
@@ -43,7 +48,7 @@ const NavBar = () => {
 
   return (
     <header
-      className={`fixed top-0 transition-all ease-in duration-300 left-0 w-full z-50 ${
+      className={`fixed top-0 transition-all ease-in left-0 w-full z-50 ${
         isSticky ? "bg-white shadow-lg" : "bg-transparent"
       }`}
     >
@@ -59,16 +64,21 @@ const NavBar = () => {
 
         {/* Desktop Navbar */}
         <ul className="hidden md:flex space-x-12">
-          {navItems.map(({ link, path }) => (
-            <Link
-              className="text-base uppercase cursor-pointer hover:text-purple-700 text-black"
-              to={path}
-              key={path}
-            >
-              {link}
-            </Link>
-          ))}
-        </ul>
+  {navItems.map(({ link, path }) => (
+    <li key={path} className="relative">
+      <Link
+        className="text-base uppercase cursor-pointer hover:text-yellow-500 text-black"
+        to={path}
+      >
+        {link}
+      </Link>
+      {/* Show <hr> only if the link is active */}
+      {location.pathname === path && (
+  <hr className="absolute bottom-[-8px] left-0 w-full border-none h-[1.5px] bg-yellow-500" />
+)}
+    </li>
+  ))}
+</ul>
 
         {/* Bars icon visible on large screens */}
         <button
@@ -100,7 +110,7 @@ const NavBar = () => {
         <div className="space-y-4 px-6 py-8">
           {navItems.map(({ link, path }) => (
             <Link
-              className="block text-base uppercase cursor-pointer hover:text-purple-700 text-black"
+              className="block text-base uppercase cursor-pointer hover:text-yellow-600 text-black"
               to={path}
               key={path}
               onClick={() => setMenuOpen(false)} // Close menu on link click

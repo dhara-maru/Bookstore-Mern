@@ -8,6 +8,7 @@ import Shop from "../Shop/Shop";
 import Contact from "../components/Contact";
 import About from "../components/About"
 import Blog from "../components/Blog"
+import SingleBook from "../Shop/SingleBook";
 
 
 
@@ -31,6 +32,17 @@ import Blog from "../components/Blog"
     {
       path : '/blog',
       element: <Blog></Blog>
+    },
+    {
+      path : '/book/:id',
+      element: <SingleBook></SingleBook>,
+      loader: async ({ params }) => {
+        const response = await fetch(`http://localhost:5000/book/${params.id}`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch the book data');
+        }
+        return response.json(); // Parse the response as JSON
+      }
     },
     {
       path : '/contact',
