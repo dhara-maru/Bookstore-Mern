@@ -17,14 +17,14 @@ const Banner = () => {
     fontWeight: 900,
   }}
 >
-  Rare Comic Treasures
+  Rare Comic Treasures!
 </span>
 
 </h1>
 
           <p className='md:w-4/5'>
             Dive into a world of stunning comics! Whether you're looking to buy, sell, or explore the latest collections, we offer the best deals and rare finds. Join a community of passionate collectors today.
-          </p>
+         🎭 </p>
 
           <div>
             <input
@@ -35,7 +35,7 @@ const Banner = () => {
               className='py-2 px-2 rounded-s-sm outline-none'
             />
             <button className='bg-black px-6 py-2 text-white font-medium hover:bg-yellow-600 font-bold transition-all ease-in duration-200'>
-              Find Your Comic
+              Find Your Comic 📚
             </button>
           </div>
         </div>

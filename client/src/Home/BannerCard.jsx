@@ -17,7 +17,7 @@ const BannerCard = () => {
         modules={[EffectCards]}
         className="mySwiper"
       >
-        <SwiperSlide><img src="src/assets/deadpool.png" alt="" /></SwiperSlide>
+        <SwiperSlide><img src="src/assets/dnw.png" alt="" /></SwiperSlide>
         <SwiperSlide><img src="src/assets/wonderwoman.png" alt="" /></SwiperSlide>
         <SwiperSlide><img src="src/assets/batman.png" alt="" /></SwiperSlide>
         <SwiperSlide><img src="src/assets/joker.png" alt="" /></SwiperSlide>
