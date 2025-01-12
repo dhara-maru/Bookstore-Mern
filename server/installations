@@ -1,3 +1,5 @@
+//https://youtu.be/2qWo6W5Wn8Q?si=Lh0p8BnM81ZyNFP3
+
 npm install express cors mongodb nodemon
 
 npm create vite@latest client -- --template react
@@ -5,3 +7,5 @@ npm create vite@latest client -- --template react
 
 npm install -D tailwindcss postcss autoprefixer
 npx tailwindcss init -p
+
+npm install react-icons --save
