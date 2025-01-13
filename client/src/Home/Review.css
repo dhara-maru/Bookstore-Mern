@@ -1,0 +1,118 @@
+/* Review Section Styles */
+.mySwiper {
+    /* Set max height and center */
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+  }
+  
+  /* For Swiper slide containers */
+  .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Centering the Review section content */
+  .swiper-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  /* Card Styles */
+  .swiper-slide > div {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    height: auto;
+    
+    max-width: 350px; /* Prevent oversized cards */
+  }
+  
+  /* Rating Stars */
+  .text-amber-500 {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin-bottom: 10px;
+  }
+  
+  /* Review Text */
+  .swiper-slide p {
+    color: #4a4a4a;
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+    max-width: 280px;
+  }
+  
+  /* Customer Avatar */
+  .swiper-slide .Avatar {
+    margin-top: 10px;
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+  }
+  
+  /* Customer Info */
+  .swiper-slide h5 {
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  
+  .swiper-slide p.text-sm {
+    font-size: 14px;
+    color: #6c757d;
+  }
+  
+  /* Make the carousel responsive */
+  @media (max-width: 868px) {
+    .swiper-slide {
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+  .myrcard222{
+    margin-left: 40px;
+    margin-right: 40px;
+  }
+    /* Adjust width for smaller screens */
+    .swiper-slide > div {
+      width: 100%;
+      padding: 15px;
+    
+    }
+    .swiper-slide p {
+        color: grey;
+        font-size: 16px;
+        line-height: 1.6;
+        margin-bottom: 10px;
+        max-width: 280px;
+      }
+    /* Increase space between slides */
+    .swiper-slide {
+      margin-bottom: 15px;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    /* For larger screens, display 3 slides */
+    .swiper-slide {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 15px;
+    }
+  
+    .mySwiper {
+      max-width: 80%;
+      margin: 0 auto;
+    }
+  }
+  

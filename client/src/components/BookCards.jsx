@@ -57,7 +57,7 @@ const BookCards = ({ headLine, books }) => {
   
   {/* Container for price and cart icon */}
   <div className="flex  items-center justify-between w-full mt-2 p-2">
-    <p className="text-black text-md font-bold text-center">250 ₹</p>
+    <p className="text-black text-md font-bold text-center">₹{book.price}</p>
     <div >
       <FaCartShopping className="w-6 h-6 text-black" />
     </div>

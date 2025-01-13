@@ -9,9 +9,10 @@ import Contact from "../components/Contact";
 import About from "../components/About"
 import Blog from "../components/Blog"
 import SingleBook from "../Shop/SingleBook";
-
-
-
+import DashboardLayout from "../dashboard/DashboardLayout";
+import UploadBook from "../dashboard/UploadBook";
+import ManageBooks from "../dashboard/ManageBooks";
+import EditBooks from "../dashboard/EditBooks";
 
   const router = createBrowserRouter([
     {
@@ -47,7 +48,30 @@ import SingleBook from "../Shop/SingleBook";
     {
       path : '/contact',
       element: <Contact></Contact>
-    }]
+    },
+  {
+    path: "/admin/dashboard",
+    element: <DashboardLayout/>,
+    children: [
+      {
+        path: "/admin/dashboard",
+        element: <Dashboard></Dashboard>
+      },
+      {
+        path: "/admin/dashboard/upload",
+        element: <UploadBook></UploadBook>
+      },
+      {
+        path: "/admin/dashboard/manage",
+        element: <ManageBooks/>
+      },
+      {
+        path: "/admin/dashboard/edit-book/:id",
+        element: <EditBooks/>,
+        loader : ({params}) => fetch(`http://localhost:5000/book/${params.id}`)
+      }
+    ]
+  }]
     },
   ]);
 
