@@ -1,7 +1,5 @@
-import {
-    createBrowserRouter,
-    RouterProvider,
-  } from "react-router-dom";
+import {createBrowserRouter} from "react-router-dom";
+import { RouterProvider } from "react-router-dom";
 import Home from "../Home/Home";
 import App from "../App";
 import Shop from "../Shop/Shop";
@@ -12,6 +10,7 @@ import SingleBook from "../Shop/SingleBook";
 import DashboardLayout from "../dashboard/DashboardLayout";
 import UploadBook from "../dashboard/UploadBook";
 import ManageBooks from "../dashboard/ManageBooks";
+import Dashboard from "../dashboard/Dashboard";
 import EditBooks from "../dashboard/EditBooks";
 
   const router = createBrowserRouter([
@@ -48,32 +47,33 @@ import EditBooks from "../dashboard/EditBooks";
     {
       path : '/contact',
       element: <Contact></Contact>
-    },
-  {
+   },
+   {
     path: "/admin/dashboard",
-    element: <DashboardLayout/>,
+    element: <DashboardLayout />, // DashboardLayout as the parent wrapper
     children: [
       {
-        path: "/admin/dashboard",
-        element: <Dashboard></Dashboard>
+        index: true, // Default route for "/admin/dashboard"
+        element: <Dashboard />,
       },
       {
-        path: "/admin/dashboard/upload",
-        element: <UploadBook></UploadBook>
+        path: "upload", // No need to repeat "/admin/dashboard"
+        element: <UploadBook />,
       },
       {
-        path: "/admin/dashboard/manage",
-        element: <ManageBooks/>
+        path: "manage", // Relative to "/admin/dashboard"
+        element: <ManageBooks />,
       },
       {
-        path: "/admin/dashboard/edit-book/:id",
-        element: <EditBooks/>,
-        loader : ({params}) => fetch(`http://localhost:5000/book/${params.id}`)
-      }
-    ]
-  }]
-    },
-  ]);
+        path: "edit-book/:id",
+        element: <EditBooks />,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/book/${params.id}`),
+      },
+    ],
+  },
+],
+},
+]);
 
-
-  export default router;
+export default router;

@@ -11,6 +11,7 @@ function App() {
     <NavBar></NavBar>
     <div className="my-20"><Outlet /></div>
     <Footer></Footer>
+
     </>
   );
 }
