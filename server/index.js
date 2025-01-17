@@ -36,32 +36,6 @@ async function run() {
         res.send(result);
     })
 
-    //get all books
-    // app.get("/all-books", async(req, res)=>{
-    //     const books = await bookCollections.find();
-    //     const result = await books.toArray();
-    //     res.send(result);
-    // } )
-
-
-    // //update a book data : patch or update method
-    // app.patch("/book/:id", async(req, res)=>{
-    //     const id = req.params.id;
-    //     const updateBookData = req.body;
-    //     const filter = {_id: new ObjectId(id)};
-    //     const options = {upsert : true};
-    //     const updateDoc = {
-    //         $set:{
-    //             ...updateBookData
-    //         }
-    //     }
-
-    //     //update
-    //     const result = await bookCollections.updateOne(filter, updateDoc, options);
-    //     res.send(result);
-    // } )
-
-
     //get single book
     app.get("/book/:id", async(req, res)=>{
       const id = req.params.id;

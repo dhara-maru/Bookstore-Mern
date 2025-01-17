@@ -8,6 +8,10 @@ import { Pagination } from "swiper/modules";
 import { FaCartShopping } from 'react-icons/fa6'
 
 const BookCards = ({ headLine, books }) => {
+
+  const filteredBooks = books.filter((book) => book.category !== "merchandise");
+
+
   return (
     <div className="my-16 px-4 lg:px-24">
       <h2 className="text-4xl md:text-5xl text-center font-bold text-black my-5">
@@ -39,7 +43,7 @@ const BookCards = ({ headLine, books }) => {
           modules={[Pagination]}
           className="swiper2"
         >
-          {books.slice(0, 10).map((book) => (
+          {filteredBooks.reverse().map((book) => (
             <SwiperSlide className="swiper-slide2" key={book._id}>
               <Link to={`/book/${book._id}`}>
               <div className="card flex flex-col items-center p-4 bg-white shadow-lg rounded-lg">

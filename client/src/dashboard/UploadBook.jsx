@@ -1,6 +1,5 @@
 import React from 'react'
 import { useState } from 'react';
-import { Fragment } from 'react';
 const UploadBook = () => {
   const [formData, setFormData] = useState({
     title: '',
@@ -41,11 +40,25 @@ const UploadBook = () => {
     const category = form.category.value;
     const bookDescription = form.description.value;
     const bookPDFURL = form.pdfUrl.value;
+    const price = form.price.value;
     
     const bookObj = {
-      bookTitle, authorName, imageURL, category, bookDescription, bookPDFURL
+      bookTitle, authorName, imageURL, category, bookDescription, bookPDFURL, price
     }
     console.log(bookObj);
+
+    fetch("http://localhost:5000/upload-book", {
+      method : "POST",
+      headers: {
+        "Content-type" : "application/json"
+      },
+      body: JSON.stringify(bookObj)
+    })
+    .then(res=>res.json())
+    .then(data=>{
+      alert("Book Uploaded Successfully!");
+      form.reset();
+    })
     
   };
 
@@ -161,6 +174,23 @@ const UploadBook = () => {
                 required
               />
             </div>
+
+            <div>
+              <label htmlFor="price" className="block text-sm font-medium text-gray-700">
+                Book Price
+              </label>
+              <input
+                type="text"
+                id="price"
+                name="price"
+                value={formData.price}
+                onChange={handleChange}
+                placeholder="Enter book price"
+                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-yellow-500 focus:border-yellow-500"
+                required
+              />
+            </div>
+
 
             {/* Submit Button */}
             <div>
