@@ -10,8 +10,8 @@ const OtherBooks = () => {
     fetch("http://localhost:5000/all-books")
       .then((res) => res.json())
       .then((data) => {
-        const filteredBooks = data.filter(book => book.category === "merchandise");
-        const shuffled = filteredBooks.sort(() => 0.5 - Math.random()); 
+        const filteredBooks2 = data.filter(book => book.category === "merchandise");
+        const shuffled = filteredBooks2.sort(() => 0.5 - Math.random()); 
         setBooks(shuffled.slice(0, 4)); 
       });
   }, []);

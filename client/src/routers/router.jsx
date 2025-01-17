@@ -9,6 +9,7 @@ import Blog from "../components/Blog"
 import SingleBook from "../Shop/SingleBook";
 import DashboardLayout from "../dashboard/DashboardLayout";
 import UploadBook from "../dashboard/UploadBook";
+import UploadProduct from "../dashboard/UploadProduct";
 import ManageBooks from "../dashboard/ManageBooks";
 import Dashboard from "../dashboard/Dashboard";
 import EditBooks from "../dashboard/EditBooks";
@@ -61,14 +62,18 @@ import EditBooks from "../dashboard/EditBooks";
         element: <UploadBook />,
       },
       {
+        path: "upload-product", // No need to repeat "/admin/dashboard"
+        element: <UploadProduct />,
+      },
+      {
         path: "manage", // Relative to "/admin/dashboard"
         element: <ManageBooks />,
       },
       {
-        path: "edit-book/:id",
+        path: "edit-book/:id",  // Relative path for editing book
         element: <EditBooks />,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/book/${params.id}`),
+          fetch(`http://localhost:5000/book/${params.id}`).then((res) => res.json()),
       },
     ],
   },

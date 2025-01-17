@@ -28,11 +28,20 @@ const SideBar = () => {
             </li>
             <li>
               <Link
+                to="/admin/dashboard/upload-product"
+                className="flex items-center px-4 py-2 text-black hover:bg-yellow-300"
+              >
+                <span className="material-icons">checkroom</span>
+                <span className="ml-3">Upload Product</span>
+              </Link>
+            </li>
+            <li>
+              <Link
                 to="/admin/dashboard/manage"
                 className="flex items-center px-4 py-2 text-black hover:bg-yellow-300"
               >
                 <span className="material-icons">inbox</span>
-                <span className="ml-3">Manage Books</span>
+                <span className="ml-3">Manage Books & Products</span>
               </Link>
             </li>
             <li>
