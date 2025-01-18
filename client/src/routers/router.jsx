@@ -1,3 +1,4 @@
+import React from "react";
 import { createBrowserRouter } from "react-router-dom";
 import { RouterProvider } from "react-router-dom";
 import Home from "../Home/Home";
@@ -6,7 +7,7 @@ import Shop from "../Shop/Shop";
 import Contact from "../components/Contact";
 import About from "../components/About";
 import Blog from "../components/Blog";
-import SingleBook from "../Shop/SingleBook";
+import SingleItem from "../components/SingleItem";
 import DashboardLayout from "../dashboard/DashboardLayout";
 import UploadBook from "../dashboard/UploadBook";
 import UploadProduct from "../dashboard/UploadProduct";
@@ -15,9 +16,8 @@ import Dashboard from "../dashboard/Dashboard";
 import EditBooks from "../dashboard/EditBooks";
 import SignUp from "../components/SignUp";
 import Login from "../components/Login";
+import Cart from "../cart/Cart";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
-
-
 
 const router = createBrowserRouter([
   {
@@ -42,7 +42,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/book/:id",
-        element: <SingleBook></SingleBook>,
+        element: <SingleItem></SingleItem>,
         loader: async ({ params }) => {
           const response = await fetch(`http://localhost:5000/book/${params.id}`);
           if (!response.ok) {
@@ -63,7 +63,10 @@ const router = createBrowserRouter([
         path: "/login",
         element: <Login></Login>,
       },
-      // Removed the `Logout` route
+      {
+        path: "/cart",
+        element: <Cart />,
+      },
       {
         path: "/admin/dashboard",
         element: <DashboardLayout />,
@@ -84,14 +87,16 @@ const router = createBrowserRouter([
             path: "manage",
             element: <ManageBooks />,
           },
-        
           {
             path: "edit-book/:id",
             element: <EditBooks />,
-            loader: ({ params }) =>
-              fetch(`http://localhost:5000/book/${params.id}`).then((res) =>
-                res.json()
-              ),
+            loader: async ({ params }) => {
+              const response = await fetch(`http://localhost:5000/book/${params.id}`);
+              if (!response.ok) {
+                throw new Error("Failed to fetch the book data");
+              }
+              return response.json();
+            },
           },
         ],
       },

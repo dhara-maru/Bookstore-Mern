@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { FaBarsStaggered, FaXmark } from "react-icons/fa6";
 import { AuthContext } from "../context/AuthProvider";
 
+
 const NavBar = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
@@ -12,6 +13,8 @@ const NavBar = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+
+  
   // Handle logout
   const handleLogout = () => {
     logOut()
@@ -62,11 +65,10 @@ const NavBar = () => {
 
   // Dropdown items
   const dropdownItems = [
-    { link: "My Account", path: "/account" },
-    { link: "My Orders", path: "/orders" },
+    { link: "🛒 My Cart", path: "/cart" },
     user
-      ? { link: "Logout", action: handleLogout }
-      : { link: "Login", path: "/login" },
+      ? { link: "📤 Logout", action: handleLogout }
+      : { link: "📲 Login", path: "/login" },
   ];
 
   return (
@@ -103,14 +105,15 @@ const NavBar = () => {
             </li>
           ))}
         </ul>
-
+       
         {/* Account Dropdown */}
         <div className="relative hidden lg:block">
+          
           <button
             className="text-black text-base uppercase font-semibold"
             onClick={toggleDropdown}
           >
-            {user ? user.email : "Account"}
+            {user ? `👩🏽‍💻 ${user.email}` : "My Account 👩🏽‍💻"}
           </button>
           {isDropdownOpen && (
             <ul className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md overflow-hidden">

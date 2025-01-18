@@ -36,7 +36,6 @@ const BookCards = ({ headLine, books }) => {
               spaceBetween: 25,
             },
           }}
-          modules={[Pagination]}
           className="swiper2"
         >
           {books.slice(0,8).map((book) => (

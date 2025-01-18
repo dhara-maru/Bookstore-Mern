@@ -1,15 +1,13 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import googlelogo from '../assets/googlelogo.png';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthProvider';
 
 const Login = () => {
   const { login, loginWithGoogle } = useContext(AuthContext);
   const [error, setError] = useState("");
-
-  const location = useLocation();
   const navigate = useNavigate();
+  const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
   const handleLogin = (event) => {
@@ -22,27 +20,26 @@ const Login = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         alert("Logged In Successfully!");
+        localStorage.setItem('userId', user.uid);  // Save the userId to localStorage
         navigate(from, { replace: true });
       })
       .catch((error) => {
-        const errorCode = error.code;
         const errorMessage = error.message;
         setError(errorMessage); // Show error message if login fails
       });
   };
 
-  // Sign up using Google
   const handleRegister = () => {
     loginWithGoogle()
       .then((result) => {
         const user = result.user;
         alert("Account successfully created with Google!");
+        localStorage.setItem('userId', user.uid);  // Save the userId to localStorage
         navigate(from, { replace: true });
       })
       .catch((error) => {
         const errorMessage = error.message;
         setError(errorMessage); // Display error message
-        console.error("Error:", errorMessage);
       });
   };
 
@@ -51,7 +48,7 @@ const Login = () => {
       {/* Left Side */}
       <div className="relative overflow-hidden md:flex w-1/2 bg-gradient-to-tr from-yellow-400 to-orange-600 justify-around items-center hidden">
         <div>
-          <h1 className="text-white font-bold text-7xl" style={{ fontStyle: 'normal', fontFamily: '"Rubik Doodle Shadow", serif', fontWeight: 900 }}>
+          <h1 className="text-white font-bold text-7xl">
             Comic Con
           </h1>
           <p className="text-white mt-1">Discover & Trade Rare Comic Treasures!</p>
@@ -93,7 +90,7 @@ const Login = () => {
           <hr />
           <div className="flex w-full items-center flex-col my-5 gap-3">
             <button onClick={handleRegister} className="block">
-              <img src={googlelogo} className="w-10 h-10 inline-block mx-3" />
+              <img src={googlelogo} className="w-10 h-10 inline-block mx-3" alt="Google" />
               Login with Google
             </button>
           </div>
