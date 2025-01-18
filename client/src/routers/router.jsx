@@ -13,6 +13,7 @@ import UploadProduct from "../dashboard/UploadProduct";
 import ManageBooks from "../dashboard/ManageBooks";
 import Dashboard from "../dashboard/Dashboard";
 import EditBooks from "../dashboard/EditBooks";
+import SignUp from "../components/SignUp";
 
   const router = createBrowserRouter([
     {
@@ -49,6 +50,10 @@ import EditBooks from "../dashboard/EditBooks";
       path : '/contact',
       element: <Contact></Contact>
    },
+   {
+    path: "signup",
+    element: <SignUp></SignUp>
+  },
    {
     path: "/admin/dashboard",
     element: <DashboardLayout />, // DashboardLayout as the parent wrapper

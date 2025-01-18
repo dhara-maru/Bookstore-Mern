@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { useLocation } from "react-router-dom";
@@ -6,10 +6,15 @@ import { useLocation } from "react-router-dom";
 
 // Icons
 import { FaBarsStaggered, FaXmark } from "react-icons/fa6";
+import { AuthContext } from "../context/AuthProvider";
 
 const NavBar = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
+  
+  const {user} = useContext(AuthContext);
+
+  //console.log(user);
   
 const location = useLocation();
 
@@ -79,6 +84,15 @@ const location = useLocation();
     </li>
   ))}
 </ul>
+{
+  user ? (
+    <span className="text-base text-black font-semibold">
+      {user.email}
+    </span>
+  ) : (
+    ""
+  )
+}
 
         {/* Bars icon visible on large screens */}
         <button
@@ -90,6 +104,8 @@ const location = useLocation();
           ) : (
             <FaBarsStaggered className="text-black h-6 w-6" />
           )}
+
+        
         </button>
 
         {/* Show bars icon on large screens (for menu toggle) */}
