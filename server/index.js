@@ -52,6 +52,50 @@ async function run() {
 
     
 
+    // for uploading blogs
+    app.post("/upload-blog", async (req, res) => {
+      try {
+        const blogData = req.body; // The blog data from the frontend
+        const result = await blogsCollection.insertOne(blogData); // Insert blog into the database
+    
+        // Send a success response with a 201 status code
+        res.status(201).json({
+          message: "Blog uploaded successfully",
+          result,
+        });
+      } catch (error) {
+        console.error("Error uploading blog:", error);
+    
+        // Send an error response with a 500 status code
+        res.status(500).json({
+          error: "Failed to upload blog",
+        });
+      }
+    });
+    
+    
+
+    
+
+    app.get("/get-blog/:id", async (req, res) => {
+      try {
+        const { id } = req.params;
+        const blogCollections = client.db("BookInventory").collection("blogs");
+        const blog = await blogCollections.findOne({ _id: new ObjectId(id) });
+    
+        if (!blog) {
+          return res.status(404).json({ message: "Blog not found" });
+        }
+    
+        res.status(200).json(blog);
+      } catch (error) {
+        console.error("Error fetching blog:", error);
+        res.status(500).json({ error: "Failed to fetch blog" });
+      }
+    });
+    
+
+
     //get single book
     app.get("/book/:id", async(req, res)=>{
       const id = req.params.id;

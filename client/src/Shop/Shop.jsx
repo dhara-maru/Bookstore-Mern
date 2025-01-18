@@ -4,27 +4,60 @@ import { FaCartShopping } from "react-icons/fa6";
 
 const Shop = () => {
   const [books, setBooks] = useState([]);
+  const [filteredBooks, setFilteredBooks] = useState([]);
+  const [activeTab, setActiveTab] = useState("non-merchandise"); // Default tab
 
   useEffect(() => {
-    // Fetch the data and update the state with the filtered books
+    // Fetch the data from the server
     fetch("http://localhost:5000/all-books")
       .then((res) => res.json())
-      .then((data) =>
-        setBooks(data.filter((book) => book.category.toLowerCase() !== "merchandise"))
-      );
-  }, []); // Empty dependency array to run this effect only once after initial render
+      .then((data) => {
+        setBooks(data); // Store all books
+        setFilteredBooks(
+          data.filter((book) => book.category.toLowerCase() !== "merchandise")
+        ); // Default filter
+      });
+  }, []);
+
+  // Handle Tab Switching
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+    if (tab === "merchandise") {
+      setFilteredBooks(books.filter((book) => book.category.toLowerCase() === "merchandise"));
+    } else {
+      setFilteredBooks(books.filter((book) => book.category.toLowerCase() !== "merchandise"));
+    }
+  };
 
   return (
-    <div className="my-16 px-4 lg:px-24">
-      <br />
+    <div className="my-16 px-4 lg:px-24"><br /><br />
       <h2 className="text-4xl md:text-5xl text-center font-bold text-black my-5">
         🦸🏼‍♀️ Explore Our Epic Comic Collection!
-      </h2>
-      <br />
+      </h2><br /><br />
 
-      {/* Responsive Grid */}
+      {/* Tabs for Switching Categories */}
+      <div className="flex justify-center mb-8 space-x-4">
+        <button
+          className={`px-6 py-2 font-medium text-sm rounded-md transition ${
+            activeTab === "non-merchandise" ? "bg-yellow-400 text-white" : "bg-gray-200 text-black"
+          }`}
+          onClick={() => handleTabChange("non-merchandise")}
+        >
+          Comics
+        </button>
+        <button
+          className={`px-6 py-2 font-medium text-sm rounded-md transition ${
+            activeTab === "merchandise" ? "bg-yellow-400 text-white" : "bg-gray-200 text-black"
+          }`}
+          onClick={() => handleTabChange("merchandise")}
+        >
+          Merchandise
+        </button>
+      </div>
+
+      {/* Responsive Grid for Displaying Books */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {books.map((book) => (
+        {filteredBooks.map((book) => (
           <Link to={`/book/${book._id}`} key={book._id}>
             <div className="card flex flex-col items-center p-4 bg-white shadow-lg rounded-lg">
               {/* Book Image */}
@@ -35,7 +68,7 @@ const Shop = () => {
                   className="w-full h-full object-cover rounded"
                 />
               </div>
-              
+
               {/* Book Title */}
               <h3 className="text-black text-lg font-medium text-center mb-1">
                 {book.bookTitle}

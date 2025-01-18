@@ -17,7 +17,7 @@ const NavBar = () => {
     logOut()
       .then(() => {
         alert("Logged out successfully!");
-        navigate("/", { replace: true }); 
+        navigate("/", { replace: true });
       })
       .catch((error) => {
         console.error("Logout failed:", error);
@@ -50,12 +50,12 @@ const NavBar = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, [isMenuOpen]);
 
-  // Navbar items
+  // Navbar items with conditional "Dashboard" link
   const navItems = [
     { link: "Home", path: "/" },
     { link: "About", path: "/about" },
     { link: "Shop", path: "/shop" },
-    { link: "Sell Your Book", path: "/admin/dashboard" },
+    ...(user?.email === "admin@gmail.com" ? [{ link: "Dashboard", path: "/admin/dashboard" }] : []),
     { link: "Blog", path: "/blog" },
     { link: "Contact", path: "/contact" },
   ];

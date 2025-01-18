@@ -1,13 +1,18 @@
-import React from 'react';
-import { data } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
-import { useState } from 'react';
-import { useEffect } from 'react';
 
+// Spinner component using Tailwind CSS
+const Spinner = () => (
+  <div className="flex justify-center items-center space-x-2">
+    <div className="w-8 h-8 border-4 border-yellow-400 border-t-transparent border-solid rounded-full animate-spin"></div>
+    <p className="text-yellow-400">Loading...</p>
+  </div>
+);
 
 const ManageBooks = () => {
   const [allBooks, setAllBooks] = useState([]);
   const [merchandiseBooks, setMerchandiseBooks] = useState([]);
+  const [activeTab, setActiveTab] = useState("all"); // 'all' or 'merchandise'
 
   useEffect(() => {
     fetch("http://localhost:5000/all-books")
@@ -86,12 +91,12 @@ const ManageBooks = () => {
               )}
               <td className="px-4 py-2 border-b">₹{book.price}</td>
               <td className="px-4 py-2 border-b text-center">
-              <Link
-  to={`/admin/dashboard/edit-book/${book._id}`}
-  className="text-blue-500 hover:underline mr-4"
->
-  Edit
-</Link>
+                <Link
+                  to={`/admin/dashboard/edit-book/${book._id}`}
+                  className="text-blue-500 hover:underline mr-4"
+                >
+                  Edit
+                </Link>
                 <button
                   onClick={() => handleDelete(book._id, isMerchandise)}
                   className="text-red-500 hover:underline"
@@ -110,20 +115,35 @@ const ManageBooks = () => {
     <div className="px-4 lg:px-8 py-6">
       <h1 className="text-2xl font-bold mb-6 text-center">Manage Books & Products</h1>
 
-      {/* First Table: Non-Merchandise Books */}
-      <h2 className="text-xl font-semibold mb-4">All Comic Books</h2>
-      {allBooks.length > 0 ? (
-        renderTable(allBooks, false)
-      ) : (
-        <p className="text-gray-600">No books available.</p>
-      )}
+      {/* Tabs for switching between All and Merchandise */}
+      <div className="mb-4 flex justify-center space-x-6">
+        <button
+          onClick={() => setActiveTab("all")}
+          className={`py-2 px-4 font-semibold ${activeTab === "all" ? "bg-yellow-400 text-white" : "bg-gray-100"}`}
+        >
+          All Comic Books
+        </button>
+        <button
+          onClick={() => setActiveTab("merchandise")}
+          className={`py-2 px-4 font-semibold ${activeTab === "merchandise" ? "bg-yellow-400 text-white" : "bg-gray-100"}`}
+        >
+          Merchandise Products
+        </button>
+      </div>
 
-      {/* Second Table: Merchandise Books */}
-      <h2 className="text-xl font-semibold mb-4">Merchandise Products</h2>
-      {merchandiseBooks.length > 0 ? (
-        renderTable(merchandiseBooks, true)
+      {/* Display Tables or Spinner */}
+      {activeTab === "all" ? (
+        allBooks.length > 0 ? (
+          renderTable(allBooks, false)
+        ) : (
+          <Spinner />
+        )
       ) : (
-        <p className="text-gray-600">No merchandise products available.</p>
+        merchandiseBooks.length > 0 ? (
+          renderTable(merchandiseBooks, true)
+        ) : (
+          <Spinner />
+        )
       )}
     </div>
   );

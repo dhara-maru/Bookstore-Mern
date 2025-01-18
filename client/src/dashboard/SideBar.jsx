@@ -44,24 +44,9 @@ const SideBar = () => {
                 <span className="ml-3">Manage Books & Products</span>
               </Link>
             </li>
-            <li>
-              <Link
-                to="/admin/dashboard/users"
-                className="flex items-center px-4 py-2 text-black hover:bg-yellow-300"
-              >
-                <span className="material-icons">people</span>
-                <span className="ml-3">Users</span>
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/admin/dashboard/products"
-                className="flex items-center px-4 py-2 text-black hover:bg-yellow-300"
-              >
-                <span className="material-icons">shopping_cart</span>
-                <span className="ml-3">Products</span>
-              </Link>
-            </li>
+          
+  
+
             <li>
               <Link
                 to="/login"
@@ -71,15 +56,7 @@ const SideBar = () => {
                 <span className="ml-3">Sign In</span>
               </Link>
             </li>
-            <li>
-              <Link
-                to="/logout"
-                className="flex items-center px-4 py-2 text-black hover:bg-yellow-300"
-              >
-                <span className="material-icons">login</span>
-                <span className="ml-3">Log Out</span>
-              </Link>
-            </li>
+           
           </ul>
         </nav>
       </div>

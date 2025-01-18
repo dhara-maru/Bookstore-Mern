@@ -17,6 +17,8 @@ import SignUp from "../components/SignUp";
 import Login from "../components/Login";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
+
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -82,6 +84,7 @@ const router = createBrowserRouter([
             path: "manage",
             element: <ManageBooks />,
           },
+        
           {
             path: "edit-book/:id",
             element: <EditBooks />,
