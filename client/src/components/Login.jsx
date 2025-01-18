@@ -1,39 +1,38 @@
-import React, { useContext, useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../context/AuthProvider';
-import googlelogo from "../assets/googlelogo.png";
+import React from 'react'
+import googlelogo from '../assets/googlelogo.png'
+import { Link, replace } from 'react-router-dom'
+import { useState, useContext, useEffect } from 'react'
+import { AuthContext } from '../context/AuthProvider'
+import { useNavigate } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
+const Login = () => {
 
-
-const SignUp = () => {
-    const { createUser, loginWithGoogle } = useContext(AuthContext);
+    const { login, loginWithGoogle } = useContext(AuthContext);
     const [error, setError] = useState("");
 
     const location = useLocation();
     const navigate = useNavigate();
 
-    const from = location.state?.from?.pathname || "/login";
+    const from = location.state?.from?.pathname || "/";
 
-    const handleSignUp = (event) => {
+    const handleLogin = (event) => {
         event.preventDefault();
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
-
-        createUser(email, password)
-            .then((userCredential) => {
-                // Successfully signed up
-                const user = userCredential.user;
-                alert("Account created successfully!");
-                console.log("User created:", user);
-                navigate(from, {replace: true})
-            })
-            .catch((error) => {
-                const errorMessage = error.message;
-                setError(errorMessage); // Display error message
-                console.error("Error:", errorMessage);
-            });
+        login(email, password)
+        .then((userCredential) => {
+            // Signed in 
+            const user = userCredential.user;
+            alert("Logged In Successfully!");
+            navigate(from, {replace:true})
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+          });
+       
     };
-
 //signup using google
 const handleRegister=()=>{
     loginWithGoogle()
@@ -48,8 +47,9 @@ const handleRegister=()=>{
         console.error("Error:", errorMessage);
     });
 }
-    return (
-        <div className="h-screen md:flex">
+
+  return (
+    <div className="h-screen md:flex">
             {/* Left Side */}
             <div className="relative overflow-hidden md:flex w-1/2 bg-gradient-to-tr from-yellow-400 to-orange-600 justify-around items-center hidden">
                 <div>
@@ -78,11 +78,11 @@ fontWeight: 900,
             {/* Right Side */}
             <div className="flex md:w-1/2 justify-center py-10 items-center bg-white">
                 <form
-                    onSubmit={handleSignUp}
+                   onClick={handleLogin}
                     className="bg-white w-full max-w-md p-8 rounded-lg shadow-md"
                 >
                     <h1 className="text-gray-800 font-bold text-2xl mb-1">
-                        Create Account
+                        Login to your account
                     </h1>
                     <p className="text-sm font-normal text-gray-600 mb-7">
                         Welcome to ComicCon - India's Largest Comic Store
@@ -140,10 +140,9 @@ fontWeight: 900,
                         type="submit"
                         className="block w-full border-black border-2 bg-yellow-400 text-black py-2 font-semibold mb-2 hover:bg-yellow-400 transition duration-300"
                     >
-                        Sign Up
+                        Login
                     </button>
 
-<p className='text-center text-red-700'>{error ? 'Invalid E-mail or password! ☹️' : ''}</p>
 
                     {/* login using google  */}
                     <hr />
@@ -156,18 +155,18 @@ fontWeight: 900,
 
                     {/* Login Link */}
                     <p className="text-sm mt-4 text-center text-gray-600">
-                        Already have an account?{' '}
+                        New to ComicCon?{' '}
                         <Link
-                            to="/login"
+                            to="/signup"
                             className="text-yellow-500 hover:underline font-bold"
                         >
-                            Login
+                            Create an Account
                         </Link>
                     </p>
                 </form>
             </div>
         </div>
-    );
-};
+  )
+}
 
-export default SignUp;
+export default Login
