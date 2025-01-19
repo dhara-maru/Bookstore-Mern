@@ -1,3 +1,4 @@
+// SideBar.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -44,8 +45,18 @@ const SideBar = () => {
                 <span className="ml-3">Manage Books & Products</span>
               </Link>
             </li>
-          
-  
+
+            {/* New Links */}
+            <li>
+              <Link
+                to="/admin/dashboard/view-users"
+                className="flex items-center px-4 py-2 text-black hover:bg-yellow-300"
+              >
+                <span className="material-icons">people</span>
+                <span className="ml-3">View Users</span>
+              </Link>
+            </li>
+           
 
             <li>
               <Link
@@ -56,15 +67,9 @@ const SideBar = () => {
                 <span className="ml-3">Sign In</span>
               </Link>
             </li>
-           
           </ul>
         </nav>
       </div>
-
-      {/* Main Content
-      <div className="flex-1 p-4">
-       
-      </div> */}
     </div>
   );
 };

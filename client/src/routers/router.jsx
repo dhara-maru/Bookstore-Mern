@@ -18,6 +18,11 @@ import SignUp from "../components/SignUp";
 import Login from "../components/Login";
 import Cart from "../cart/Cart";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import ProceedToBuy from "../cart/ProceedToBuy";
+import OrderPlaced from "../cart/OrderPlaced";
+import MyOrders from "../cart/MyOrders";
+import ViewUsers from "../dashboard/ViewUsers";
+
 
 const router = createBrowserRouter([
   {
@@ -68,6 +73,18 @@ const router = createBrowserRouter([
         element: <Cart />,
       },
       {
+        path: "/proceed-to-buy",
+        element: <ProceedToBuy />,
+      },
+      {
+        path: "/order-placed",
+        element: <OrderPlaced />,
+      },
+      {
+        path: "/my-orders",
+        element: <MyOrders />,
+      },
+      {
         path: "/admin/dashboard",
         element: <DashboardLayout />,
         children: [
@@ -86,6 +103,10 @@ const router = createBrowserRouter([
           {
             path: "manage",
             element: <ManageBooks />,
+          },
+          {
+            path: "view-users",
+            element: <ViewUsers />,
           },
           {
             path: "edit-book/:id",

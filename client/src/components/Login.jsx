@@ -45,19 +45,32 @@ const Login = () => {
 
   return (
     <div className="h-screen md:flex">
-      {/* Left Side */}
-      <div className="relative overflow-hidden md:flex w-1/2 bg-gradient-to-tr from-yellow-400 to-orange-600 justify-around items-center hidden">
-        <div>
-          <h1 className="text-white font-bold text-7xl">
-            Comic Con
-          </h1>
-          <p className="text-white mt-1">Discover & Trade Rare Comic Treasures!</p>
-          <button type="button" className="block p-5 bg-black text-white mt-4 py-2 border-2 border-white font-bold mb-2">
-            Explore Books
-          </button>
-        </div>
-      </div>
+         {/* Left Side */}
+         <div className="relative overflow-hidden md:flex w-1/2 bg-gradient-to-tr from-yellow-400 to-orange-600 justify-around items-center hidden">
+                <div>
+                    <h1 className="text-white font-bold text-7xl" style={{
 
+fontStyle: 'normal',
+fontFamily: '"Rubik Doodle Shadow", serif',
+fontWeight: 900,
+}}>Comic Con</h1>
+                    <p className="text-white mt-1">
+                    Discover & Trade Rare Comic Trasures!
+                    </p>
+                    <button
+                        type="button"
+                        className="block p-5 bg-black text-white mt-4 py-2 border-2 border-white font-bold mb-2"
+                    >
+                        Explore Books
+                    </button>
+                </div>
+                <div className="absolute -bottom-32 -left-40 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
+                <div className="absolute -bottom-40 -left-20 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
+                <div className="absolute -top-40 -right-0 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
+                <div className="absolute -top-20 -right-20 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
+            </div>
+
+            
       {/* Right Side */}
       <div className="flex md:w-1/2 justify-center py-10 items-center bg-white">
         <form onSubmit={handleLogin} className="bg-white w-full max-w-md p-8 rounded-lg shadow-md">
