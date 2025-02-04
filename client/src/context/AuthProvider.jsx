@@ -1,49 +1,66 @@
-import React, { createContext, useEffect, useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react';
 import { onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import { signOut, GoogleAuthProvider } from "firebase/auth";
-import app from '../firebase/firebase.config'
+import app from '../firebase/firebase.config';
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 
-export const AuthContext= createContext();
+export const AuthContext = createContext();
 const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
-
-
-
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    const createUser = (email, password) => {
-        setLoading(true); 
-        return createUserWithEmailAndPassword(auth, email, password)
-    }
-
-    const loginWithGoogle = ()=>{
+    const createUser = async (email, password) => {
         setLoading(true);
-        signInWithPopup(auth, googleProvider)
-    }
+        try {
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
 
-    const login = (email, password) =>{
+            // Save user data to MongoDB
+            await fetch("http://localhost:5000/register-user", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    email: user.email,
+                    uid: user.uid,
+                    createdAt: new Date().toISOString(),
+                }),
+            });
+            return userCredential;
+        } catch (error) {
+            console.error("Error creating user:", error);
+            throw error;
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const loginWithGoogle = () => {
         setLoading(true);
-        return signInWithEmailAndPassword(auth, email, password)
-    }
+        return signInWithPopup(auth, googleProvider);
+    };
 
-    const logOut = ()=>{
-        return signOut(auth)
-    }
+    const login = (email, password) => {
+        setLoading(true);
+        return signInWithEmailAndPassword(auth, email, password);
+    };
+
+    const logOut = () => {
+        return signOut(auth);
+    };
+
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            // Set the user and stop the loading state when the auth state changes
             setUser(currentUser);
             setLoading(false);
         });
-    
-        // Return the unsubscribe function for cleanup
+
         return () => unsubscribe();
     }, []);
-    
 
     const authInfo = {
         user,
@@ -51,13 +68,14 @@ const AuthProvider = ({ children }) => {
         loginWithGoogle,
         loading,
         login,
-        logOut
-    }
-  return (
-   <AuthContext.Provider value={authInfo}>
-    {children}
-   </AuthContext.Provider>
-  )
-}
+        logOut,
+    };
 
-export default AuthProvider
+    return (
+        <AuthContext.Provider value={authInfo}>
+            {children}
+        </AuthContext.Provider>
+    );
+};
+
+export default AuthProvider;

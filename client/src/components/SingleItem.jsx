@@ -9,7 +9,7 @@ const SingleItem = () => {
   React.useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/book/${id}`);
+        const response = await fetch(`http://localhost:5000/books/${id}`);
         if (!response.ok) {
           throw new Error("Failed to fetch product details");
         }
@@ -54,7 +54,7 @@ const SingleItem = () => {
   
 
   return (
-    <div className="single-item-container p-6 md:p-10 bg-yellow-100 rounded-lg shadow-lg max-w-full mx-auto mt-10">
+    <div className="single-item-container p-6 md:p-10 bg-yellow-100 rounded-lg shadow-lg max-w-3xl mx-auto mt-12">
       <div className="flex flex-col md:flex-row items-center">
         <img
           src={product?.imageURL}
@@ -89,9 +89,7 @@ const SingleItem = () => {
             <button onClick={addToCart} className="px-6 py-2 bg-yellow-400 text-white rounded-lg hover:bg-yellow-500 transition">
               Add to Cart
             </button>
-            <button className="px-6 py-2 bg-black text-white rounded-lg hover:bg-gray-700 transition">
-              Buy Now
-            </button>
+          
           </div>
 
           <button

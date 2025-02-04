@@ -1,50 +1,57 @@
 import React from "react";
-import { createBrowserRouter } from "react-router-dom";
-import { RouterProvider } from "react-router-dom";
-import Home from "../Home/Home";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "../App";
+import Home from "../Home/Home";
 import Shop from "../Shop/Shop";
-import Contact from "../components/Contact";
 import About from "../components/About";
 import Blog from "../components/Blog";
+import Contact from "../components/Contact";
 import SingleItem from "../components/SingleItem";
-import DashboardLayout from "../dashboard/DashboardLayout";
-import UploadBook from "../dashboard/UploadBook";
-import UploadProduct from "../dashboard/UploadProduct";
-import ManageBooks from "../dashboard/ManageBooks";
-import Dashboard from "../dashboard/Dashboard";
-import EditBooks from "../dashboard/EditBooks";
 import SignUp from "../components/SignUp";
 import Login from "../components/Login";
 import Cart from "../cart/Cart";
+import ProceedToBuy from "../cart/ProceedToBuy";
+import OrderPlaced from "../cart/OrderPlaced";
+import DashboardLayout from "../dashboard/DashboardLayout";
+import EditBook from "../dashboard/EditBook";
+import DeleteBook from "../dashboard/DeleteBook";
+import EditProduct from "../dashboard/EditProduct";
+import DeleteProduct from "../dashboard/DeleteProduct";
+import UploadBook from "../dashboard/UploadBook";
+import UploadProduct from "../dashboard/UploadProduct";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import Dashboard from "../dashboard/Dashboard";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App></App>,
+    element: <App />,
     children: [
       {
         path: "/",
-        element: <Home></Home>,
+        element: <Home />,
       },
       {
         path: "/shop",
-        element: <Shop></Shop>,
+        element: <Shop />,
       },
       {
         path: "/about",
-        element: <About></About>,
+        element: <About />,
       },
       {
         path: "/blog",
-        element: <Blog></Blog>,
+        element: <Blog />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
       },
       {
         path: "/book/:id",
-        element: <SingleItem></SingleItem>,
+        element: <SingleItem />,
         loader: async ({ params }) => {
-          const response = await fetch(`http://localhost:5000/book/${params.id}`);
+          const response = await fetch(`http://localhost:5000/books/${params.id}`);
           if (!response.ok) {
             throw new Error("Failed to fetch the book data");
           }
@@ -52,20 +59,24 @@ const router = createBrowserRouter([
         },
       },
       {
-        path: "/contact",
-        element: <Contact></Contact>,
-      },
-      {
         path: "/signup",
-        element: <SignUp></SignUp>,
+        element: <SignUp />,
       },
       {
         path: "/login",
-        element: <Login></Login>,
+        element: <Login />,
       },
       {
         path: "/cart",
         element: <Cart />,
+      },
+      {
+        path: "/proceed-to-buy",
+        element: <ProceedToBuy />,
+      },
+      {
+        path: "/order-placed",
+        element: <OrderPlaced />,
       },
       {
         path: "/admin/dashboard",
@@ -73,7 +84,11 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <PrivateRoute><Dashboard /></PrivateRoute>,
+            element: (
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            ),
           },
           {
             path: "upload",
@@ -84,19 +99,20 @@ const router = createBrowserRouter([
             element: <UploadProduct />,
           },
           {
-            path: "manage",
-            element: <ManageBooks />,
+            path: "edit-book",
+            element: <EditBook />,
           },
           {
-            path: "edit-book/:id",
-            element: <EditBooks />,
-            loader: async ({ params }) => {
-              const response = await fetch(`http://localhost:5000/book/${params.id}`);
-              if (!response.ok) {
-                throw new Error("Failed to fetch the book data");
-              }
-              return response.json();
-            },
+            path: "delete-book",
+            element: <DeleteBook />,
+          },
+          {
+            path: "edit-product",
+            element: <EditProduct />,
+          },
+          {
+            path: "delete-product",
+            element: <DeleteProduct />,
           },
         ],
       },

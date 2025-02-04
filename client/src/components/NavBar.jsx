@@ -3,7 +3,6 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { FaBarsStaggered, FaXmark } from "react-icons/fa6";
 import { AuthContext } from "../context/AuthProvider";
 
-
 const NavBar = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
@@ -13,8 +12,6 @@ const NavBar = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-
-  
   // Handle logout
   const handleLogout = () => {
     logOut()
@@ -69,19 +66,19 @@ const NavBar = () => {
     user
       ? { link: "📤 Logout", action: handleLogout }
       : { link: "📲 Login", path: "/login" },
-  ];
+  ].filter(item => user || (!user && item.link !== "🛒 My Cart" && item.link !== "📦 My Orders"));
 
   return (
     <header
-      className={`fixed top-0 transition-all ease-in left-0 w-full z-50 ${
-        isSticky ? "bg-white shadow-lg" : "bg-transparent"
+      className={`fixed top-0 transition-all ease-in-out left-0 w-full z-50 ${
+        isSticky ? "bg-white shadow-lg duration-300" : "bg-transparent duration-300"
       }`}
     >
       <nav className="flex justify-between items-center p-4 lg:px-24">
         {/* Logo */}
         <Link to="/" className="flex items-center">
           <img
-            src="./src/assets/mainlogo.png"
+            src="../assets/mainlogo.png"
             alt="Logo"
             className="h-10 w-auto"
           />
@@ -105,10 +102,9 @@ const NavBar = () => {
             </li>
           ))}
         </ul>
-       
+
         {/* Account Dropdown */}
         <div className="relative hidden lg:block">
-          
           <button
             className="text-black text-base uppercase font-semibold"
             onClick={toggleDropdown}

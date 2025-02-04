@@ -1,5 +1,6 @@
 import React from 'react';
 import BannerCard from '../Home/BannerCard';
+import { Link } from 'react-router-dom';
 
 const Banner = () => {
   return (
@@ -27,16 +28,18 @@ const Banner = () => {
          🎭 </p>
 
           <div>
-            <input
+            {/* <input
               type="search"
               name='search'
               id='search'
               placeholder='Search for your Favorite Comic'
               className='py-2 px-2 rounded-s-sm outline-none'
-            />
+            /> */}
+            <Link to="/shop" className="block">
             <button className='bg-black px-6 py-2 text-white font-medium hover:bg-yellow-600 font-bold transition-all ease-in duration-200'>
               Find Your Comic 📚
             </button>
+            </Link>
           </div>
         </div>
 

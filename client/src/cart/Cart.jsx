@@ -1,12 +1,14 @@
+import { useNavigate } from "react-router-dom";
 import React from "react";
 
 const Cart = () => {
-  const userId = localStorage.getItem('userId'); // Retrieve the user's unique ID or session key
+  const navigate = useNavigate();
+  const userId = localStorage.getItem('userId');
   const cartItems = JSON.parse(localStorage.getItem(`cart-${userId}`)) || [];
 
   const handleDelete = (index) => {
     const updatedCart = [...cartItems];
-    updatedCart.splice(index, 1);  // Remove the item at the given index
+    updatedCart.splice(index, 1);
     localStorage.setItem(`cart-${userId}`, JSON.stringify(updatedCart));
   };
 
@@ -15,7 +17,7 @@ const Cart = () => {
   }
 
   return (
-    <div className="p-6 rounded-lg  max-w-full mx-auto mt-10">
+    <div className="p-6 rounded-lg max-w-full mx-auto mt-10">
       <h2 className="text-2xl font-bold text-gray-800 mb-6">Your Cart</h2>
       <div className="overflow-x-auto">
         <table className="min-w-full border-collapse border border-gray-500">
@@ -55,7 +57,10 @@ const Cart = () => {
       </div>
 
       <div className="flex justify-end mt-6">
-        <button className="px-6 py-2 bg-green-400 text-white rounded-lg hover:bg-green-500 transition">
+        <button
+          className="px-6 py-2 bg-green-400 text-white rounded-lg hover:bg-green-500 transition"
+          onClick={() => navigate("/proceed-to-buy")}
+        >
           Proceed to Checkout
         </button>
       </div>

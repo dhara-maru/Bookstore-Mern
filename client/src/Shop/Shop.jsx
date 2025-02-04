@@ -6,16 +6,18 @@ const Shop = () => {
   const [books, setBooks] = useState([]);
   const [filteredBooks, setFilteredBooks] = useState([]);
   const [activeTab, setActiveTab] = useState("non-merchandise"); // Default tab
+  const [loading, setLoading] = useState(true); // Loading state
 
   useEffect(() => {
     // Fetch the data from the server
-    fetch("http://localhost:5000/all-books")
+    fetch("http://localhost:5000/books/all-books")
       .then((res) => res.json())
       .then((data) => {
         setBooks(data); // Store all books
         setFilteredBooks(
           data.filter((book) => book.category.toLowerCase() !== "merchandise")
         ); // Default filter
+        setLoading(false); // Data loaded
       });
   }, []);
 
@@ -57,41 +59,47 @@ const Shop = () => {
 
       {/* Responsive Grid for Displaying Books */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {filteredBooks.map((book) => (
-          <Link to={`/book/${book._id}`} key={book._id}>
-            <div className="card flex flex-col items-center p-4 bg-white shadow-lg rounded-lg">
-              {/* Book Image */}
-              <div className="card-image w-3/4 h-[250px] mb-4">
-                <img
-                  src={book.imageURL}
-                  alt={book.bookTitle}
-                  className="w-full h-full object-cover rounded"
-                />
+        {loading ? (
+          <div className="flex justify-center items-center w-full h-64">
+            <div className="w-12 h-12 border-4 border-yellow-400 border-dashed rounded-full animate-spin"></div>
+          </div>
+        ) : (
+          filteredBooks.map((book) => (
+            <Link to={`/book/${book._id}`} key={book._id}>
+              <div className="card flex flex-col items-center p-4 bg-white shadow-lg rounded-lg">
+                {/* Book Image */}
+                <div className="card-image w-3/4 h-[250px] mb-4">
+                  <img
+                    src={book.imageURL}
+                    alt={book.bookTitle}
+                    className="w-full h-full object-cover rounded"
+                  />
+                </div>
+
+                {/* Book Title */}
+                <h3 className="text-black text-lg font-medium text-center mb-1">
+                  {book.bookTitle}
+                </h3>
+
+                {/* Book Description */}
+                <p className="text-gray-600 text-sm font-light text-center mb-2">
+                  {book.bookDescription}
+                </p>
+
+                {/* Author Name */}
+                <p className="text-black text-sm font-light text-center mb-2">
+                   {book.authorName}
+                </p>
+
+                {/* Price and Cart Icon */}
+                <div className="flex items-center justify-between w-full mt-2 p-2">
+                  <p className="text-black text-md font-bold">₹{book.price}</p>
+                  <FaCartShopping className="w-6 h-6 text-black" />
+                </div>
               </div>
-
-              {/* Book Title */}
-              <h3 className="text-black text-lg font-medium text-center mb-1">
-                {book.bookTitle}
-              </h3>
-
-              {/* Book Description */}
-              <p className="text-gray-600 text-sm font-light text-center mb-2">
-                {book.bookDescription}
-              </p>
-
-              {/* Author Name */}
-              <p className="text-black text-sm font-light text-center mb-2">
-                by {book.authorName}
-              </p>
-
-              {/* Price and Cart Icon */}
-              <div className="flex items-center justify-between w-full mt-2 p-2">
-                <p className="text-black text-md font-bold">₹{book.price}</p>
-                <FaCartShopping className="w-6 h-6 text-black" />
-              </div>
-            </div>
-          </Link>
-        ))}
+            </Link>
+          ))
+        )}
       </div>
     </div>
   );

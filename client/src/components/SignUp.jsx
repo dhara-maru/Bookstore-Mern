@@ -19,19 +19,44 @@ const SignUp = () => {
         const email = form.email.value;
         const password = form.password.value;
 
-        createUser(email, password)
-            .then((userCredential) => {
-                // Successfully signed up
-                const user = userCredential.user;
-                alert("Account created successfully!");
-                console.log("User created:", user);
-                navigate(from, {replace: true})
-            })
-            .catch((error) => {
-                const errorMessage = error.message;
-                setError(errorMessage); // Display error message
-                console.error("Error:", errorMessage);
-            });
+
+
+   createUser(email, password)
+  .then((userCredential) => {
+    const user = userCredential.user;
+
+    // Add user to MongoDB
+    fetch("http://localhost:5000/users/register-user", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: user.email,
+        uid: user.uid,
+        createdAt: new Date().toISOString(),
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.message) {
+          alert("Account created successfully and saved to MongoDB!");
+        }
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        console.error("Error saving user to MongoDB:", error);
+        setError("Error saving user data. Please try again.");
+      });
+  })
+  .catch((error) => {
+    const errorMessage = error.message;
+    setError(errorMessage);
+    console.error("Error:", errorMessage);
+  });
+
+
+
     };
 
 //signup using google

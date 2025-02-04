@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 
 const UploadProduct = () => {
   const [formData, setFormData] = useState({
-    productTitle: '',
+    bookTitle: '', // Changed to match the book model key
     price: '',
     imageURL: '',
-    productDescription: '',
+    bookDescription: '', // Changed to match the book model key
   });
 
   const handleChange = (e) => {
@@ -27,13 +27,13 @@ const UploadProduct = () => {
     const productData = {
       ...formData,
       price: parseFloat(formData.price), // Ensuring price is a number
-      category: 'merchandise', 
+      category: 'merchandise',  // Fixed category to 'merchandise'
     };
 
     console.log(productData);
 
-    // Send product data to the server
-    fetch("http://localhost:5000/upload-product", {
+
+    fetch("http://localhost:5000/books/upload-book", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -45,10 +45,10 @@ const UploadProduct = () => {
         alert("Product Uploaded Successfully!");
         form.reset();
         setFormData({
-          productTitle: '',
+          bookTitle: '',
           price: '',
           imageURL: '',
-          productDescription: '',
+          bookDescription: '',
         });
         setSuccessMessage('Product uploaded successfully!');
         setErrorMessage('');
@@ -67,14 +67,14 @@ const UploadProduct = () => {
         <form onSubmit={handleProductSubmit} className="space-y-6">
           {/* Product Title */}
           <div>
-            <label htmlFor="productTitle" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="bookTitle" className="block text-sm font-medium text-gray-700">
               Product Title
             </label>
             <input
               type="text"
-              id="productTitle"
-              name="productTitle"
-              value={formData.productTitle}
+              id="bookTitle"
+              name="bookTitle" // Matching the book model key
+              value={formData.bookTitle}
               onChange={handleChange}
               placeholder="Enter product title"
               className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-yellow-500 focus:border-yellow-500"
@@ -118,13 +118,13 @@ const UploadProduct = () => {
 
           {/* Product Description */}
           <div>
-            <label htmlFor="productDescription" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="bookDescription" className="block text-sm font-medium text-gray-700">
               Product Description
             </label>
             <textarea
-              id="productDescription"
-              name="productDescription"
-              value={formData.productDescription}
+              id="bookDescription"
+              name="bookDescription" // Matching the book model key
+              value={formData.bookDescription}
               onChange={handleChange}
               placeholder="Enter product description"
               className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-yellow-500 focus:border-yellow-500"
@@ -142,6 +142,10 @@ const UploadProduct = () => {
               Upload Product
             </button>
           </div>
+
+          {/* Success and Error Messages */}
+          {successMessage && <p className="text-green-500 text-center mt-4">{successMessage}</p>}
+          {errorMessage && <p className="text-red-500 text-center mt-4">{errorMessage}</p>}
         </form>
       </div>
     </div>

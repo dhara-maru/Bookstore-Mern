@@ -57,7 +57,7 @@ const UploadBook = () => {
 
     console.log(bookObj);
 
-    fetch("http://localhost:5000/upload-book", {
+    fetch("http://localhost:5000/books/upload-book", {
       method: "POST",
       headers: {
         "Content-type": "application/json",

@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import BookCards from '../components/BookCards';
-import marvellogo from '../assets/marvellogo.png';
 import { Link } from 'react-router-dom';
 
 const OtherBooks = () => {
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/all-books")
+    fetch("http://localhost:5000/books/all-books")
       .then((res) => res.json())
       .then((data) => {
         const filteredBooks2 = data.filter(book => book.category === "merchandise");

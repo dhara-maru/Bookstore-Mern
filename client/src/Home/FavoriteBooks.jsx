@@ -8,7 +8,7 @@ const FavoriteBooks = () => {
 
   useEffect(() => {
     // Fetch the data and update the state with the fetched books
-    fetch("http://localhost:5000/all-books")
+    fetch("http://localhost:5000/books/all-books")
       .then((res) => res.json())
       .then(data=>setBooks(data));
       
