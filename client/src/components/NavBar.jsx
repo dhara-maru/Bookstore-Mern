@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { FaBarsStaggered, FaXmark } from "react-icons/fa6";
 import { AuthContext } from "../context/AuthProvider";
+import mainlogo from '../assets/mainlogo.png'
 
 const NavBar = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -78,7 +79,7 @@ const NavBar = () => {
         {/* Logo */}
         <Link to="/" className="flex items-center">
           <img
-            src="../assets/mainlogo.png"
+            src={mainlogo}
             alt="Logo"
             className="h-10 w-auto"
           />
