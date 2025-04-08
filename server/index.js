@@ -30,7 +30,7 @@ app.get("/", (req, res) => {
     console.log("Connected to MongoDB");
 
     app.listen(port, () => {
-      console.log(`Server running on http://localhost:${port}`);
+      console.log(`Server running on https://bookstore-mern-backend-1q16.onrender.com/`);
     });
   } catch (error) {
     console.error("Error starting server:", error);

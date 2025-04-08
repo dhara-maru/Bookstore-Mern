@@ -4,7 +4,7 @@ const DeleteBook = () => {
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/books/all-books")
+    fetch("https://bookstore-mern-backend-1q16.onrender.com/books/all-books")
       .then((res) => res.json())
       .then((data) => {
      
@@ -14,7 +14,7 @@ const DeleteBook = () => {
   }, []);
 
   const handleDelete = (id) => {
-    fetch(`http://localhost:5000/books/${id}`, {
+    fetch(`https://bookstore-mern-backend-1q16.onrender.com/books/${id}`, {
       method: "DELETE",
     })
       .then(() => setBooks(books.filter((book) => book._id !== id)));

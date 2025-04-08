@@ -6,7 +6,7 @@ const OtherBooks = () => {
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/books/all-books")
+    fetch("https://bookstore-mern-backend-1q16.onrender.com/books/all-books")
       .then((res) => res.json())
       .then((data) => {
         const filteredBooks2 = data.filter(book => book.category === "merchandise");

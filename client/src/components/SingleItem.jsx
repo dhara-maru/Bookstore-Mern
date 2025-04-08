@@ -9,7 +9,7 @@ const SingleItem = () => {
   React.useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/books/${id}`);
+        const response = await fetch(`https://bookstore-mern-backend-1q16.onrender.com/books/${id}`);
         if (!response.ok) {
           throw new Error("Failed to fetch product details");
         }

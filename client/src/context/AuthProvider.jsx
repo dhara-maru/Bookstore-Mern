@@ -19,7 +19,7 @@ const AuthProvider = ({ children }) => {
             const user = userCredential.user;
 
             // Save user data to MongoDB
-            await fetch("http://localhost:5000/register-user", {
+            await fetch("https://bookstore-mern-backend-1q16.onrender.com/register-user", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

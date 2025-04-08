@@ -51,7 +51,7 @@ const router = createBrowserRouter([
         path: "/book/:id",
         element: <SingleItem />,
         loader: async ({ params }) => {
-          const response = await fetch(`http://localhost:5000/books/${params.id}`);
+          const response = await fetch(`https://bookstore-mern-backend-1q16.onrender.com/books/${params.id}`);
           if (!response.ok) {
             throw new Error("Failed to fetch the book data");
           }

@@ -26,7 +26,8 @@ const SignUp = () => {
     const user = userCredential.user;
 
     // Add user to MongoDB
-    fetch("http://localhost:5000/users/register-user", {
+    // fetch("http://localhost:5000/users/register-user", {
+    fetch("https://bookstore-mern-backend-1q16.onrender.com/users/register-user", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

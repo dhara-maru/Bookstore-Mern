@@ -6,7 +6,7 @@ const ViewUsers = () => {
 
   useEffect(() => {
   
-    fetch("http://localhost:5000/users/all-users")
+    fetch("https://bookstore-mern-backend-1q16.onrender.com/users/all-users")
       .then((res) => res.json())
       .then((data) => setUsers(data));
   }, []);

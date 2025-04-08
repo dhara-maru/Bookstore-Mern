@@ -4,13 +4,13 @@ const DeleteProduct = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/books/all-books?category=merchandise`)
+    fetch(`https://bookstore-mern-backend-1q16.onrender.com/books/all-books?category=merchandise`)
       .then((res) => res.json())
       .then((data) => setProducts(data));
   }, []);
 
   const handleDelete = (id) => {
-    fetch(`http://localhost:5000/books/${id}`, {
+    fetch(`https://bookstore-mern-backend-1q16.onrender.com/books/${id}`, {
       method: "DELETE",
     })
       .then(() => setProducts(products.filter((product) => product._id !== id)));

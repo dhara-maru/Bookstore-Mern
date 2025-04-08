@@ -5,7 +5,8 @@ const MyOrders = () => {
 
   useEffect(() => {
     const userId = localStorage.getItem("userId");
-    fetch(`http://localhost:5000/my-orders/${userId}`)
+    // fetch(`http://localhost:5000/my-orders/${userId}`)
+    fetch(`https://bookstore-mern-backend-1q16.onrender.com/my-orders/${userId}`)
       .then(response => response.json())
       .then(data => setOrders(data))
       .catch(error => console.error('Error fetching orders:', error));

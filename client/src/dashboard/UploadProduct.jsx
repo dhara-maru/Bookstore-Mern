@@ -33,7 +33,7 @@ const UploadProduct = () => {
     console.log(productData);
 
 
-    fetch("http://localhost:5000/books/upload-book", {
+    fetch("https://bookstore-mern-backend-1q16.onrender.com/books/upload-book", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -18,7 +18,7 @@ const EditBooks = () => {
     // Fetch the book data based on the ID from the URL
     const fetchBook = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/book/${id}`);
+        const response = await fetch(`https://bookstore-mern-backend-1q16.onrender.com/book/${id}`);
         if (!response.ok) throw new Error('Failed to fetch book data');
         const data = await response.json();
         setBookData({
@@ -47,7 +47,7 @@ const EditBooks = () => {
     };
 
     try {
-      const response = await fetch(`http://localhost:5000/book/${id}`, {
+      const response = await fetch(`https://bookstore-mern-backend-1q16.onrender.com/book/${id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

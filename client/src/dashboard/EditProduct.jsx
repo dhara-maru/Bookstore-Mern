@@ -13,7 +13,7 @@ const EditProduct = () => {
 
   useEffect(() => {
     // Fetch all books excluding 'merchandise' category
-    fetch("http://localhost:5000/books/all-books?category=merchandise")
+    fetch("https://bookstore-mern-backend-1q16.onrender.com/books/all-books?category=merchandise")
       .then((res) => res.json())
       .then((data) => setProducts(data));
   }, []);
@@ -36,7 +36,7 @@ const EditProduct = () => {
       imageURL: formData.imageURL,
     };
 
-    fetch(`http://localhost:5000/books/${selectedProduct._id}`, {
+    fetch(`https://bookstore-mern-backend-1q16.onrender.com/books/${selectedProduct._id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

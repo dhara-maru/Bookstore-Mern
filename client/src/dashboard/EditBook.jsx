@@ -15,7 +15,7 @@ const EditBook = () => {
 
   // Fetch all books except merchandise
   useEffect(() => {
-    fetch("http://localhost:5000/books/all-books")
+    fetch("https://bookstore-mern-backend-1q16.onrender.com/books/all-books")
       .then((res) => res.json())
       .then((data) => setBooks(data.filter(book => book.category !== "merchandise")));
   }, []);
@@ -49,7 +49,7 @@ const handleSubmit = (e) => {
       delete updatedData.bookPDFURL; // Only include bookPDFURL for non-merchandise
     }
   
-    fetch(`http://localhost:5000/books/${selectedBook._id}`, {
+    fetch(`https://bookstore-mern-backend-1q16.onrender.com/books/${selectedBook._id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json"

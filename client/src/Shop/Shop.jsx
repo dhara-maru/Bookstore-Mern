@@ -10,7 +10,7 @@ const Shop = () => {
 
   useEffect(() => {
     // Fetch the data from the server
-    fetch("http://localhost:5000/books/all-books")
+    fetch("https://bookstore-mern-backend-1q16.onrender.com/books/all-books")
       .then((res) => res.json())
       .then((data) => {
         setBooks(data); // Store all books

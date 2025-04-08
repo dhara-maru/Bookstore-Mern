@@ -14,7 +14,7 @@ const ManageBooks = () => {
   const [activeTab, setActiveTab] = useState("all"); // 'all' or 'merchandise'
 
   useEffect(() => {
-    fetch("http://localhost:5000/books/all-books")
+    fetch("https://bookstore-mern-backend-1q16.onrender.com/books/all-books")
       .then((res) => res.json())
       .then((data) => {
         const nonMerchandiseBooks = data.filter(
@@ -32,7 +32,7 @@ const ManageBooks = () => {
   const handleDelete = (id, isMerchandise) => {
     if (!id) return;
 
-    fetch(`http://localhost:5000/books/delete-book/${id}`, {
+    fetch(`https://bookstore-mern-backend-1q16.onrender.com/books/delete-book/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
