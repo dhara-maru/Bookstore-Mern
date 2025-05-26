@@ -17,13 +17,13 @@ const BannerCard = () => {
         modules={[EffectCards]}
         className="mySwiper"
       >
-        <SwiperSlide><img src="src/assets/dnw.png" alt="" /></SwiperSlide>
-        <SwiperSlide><img src="src/assets/wonderwoman.png" alt="" /></SwiperSlide>
-        <SwiperSlide><img src="src/assets/batman.png" alt="" /></SwiperSlide>
-        <SwiperSlide><img src="src/assets/joker.png" alt="" /></SwiperSlide>
-        <SwiperSlide><img src="src/assets/blackwidow.png" alt="" /></SwiperSlide>
-        <SwiperSlide><img src="src/assets/ironman.png" alt="" /></SwiperSlide>
-        <SwiperSlide><img src="src/assets/wolverine.png" alt="" /></SwiperSlide>
+        <SwiperSlide><img src="https://res.cloudinary.com/dbupin7tz/image/upload/v1748247761/dnw_roytsc.png" alt="" /></SwiperSlide>
+        <SwiperSlide><img src="https://res.cloudinary.com/dbupin7tz/image/upload/v1748247774/wonderwoman_xgwwow.png" alt="" /></SwiperSlide>
+        <SwiperSlide><img src="https://res.cloudinary.com/dbupin7tz/image/upload/v1748247748/batman_hsqzvv.png" alt="" /></SwiperSlide>
+        <SwiperSlide><img src="https://res.cloudinary.com/dbupin7tz/image/upload/v1748247756/joker_hbthd6.png" alt="" /></SwiperSlide>
+        <SwiperSlide><img src="https://res.cloudinary.com/dbupin7tz/image/upload/v1748247774/blackwidow_dl42pk.png" alt="" /></SwiperSlide>
+        <SwiperSlide><img src="https://res.cloudinary.com/dbupin7tz/image/upload/v1748247766/ironman_af9avl.png" alt="" /></SwiperSlide>
+        <SwiperSlide><img src="https://res.cloudinary.com/dbupin7tz/image/upload/v1748247776/wolverine_ryzdn6.png" alt="" /></SwiperSlide>
       </Swiper>
     </div>
   );
