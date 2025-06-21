@@ -11,7 +11,7 @@ import p6 from '../assets/p6.jpg';
 const reviews = [
   {
     img: p3,
-    name: "Dhara M.",
+    name: "Udit K.",
     review: "This place is a superhero's secret lair! I found comics I didn't even know existed, and my collection just got supercharged. 10/10!",
   },
   {
