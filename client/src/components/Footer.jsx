@@ -52,7 +52,7 @@ const Footer = () => {
       {/* Footer Bottom */}
       <div className="text-center mt-8">
         <hr />
-        <p className="py-5 text-sm text-gray-600">Copyright 2025 | Created by Dhara M.</p>
+        <p className="py-5 text-sm text-gray-600">Copyright 2025</p>
       </div>
     </>
   );
